@@ -3,7 +3,7 @@ class Solution {
         List<List<Integer>> result = new ArrayList<>();
 
         // Step 1: Array ko sort karte hain
-        // Taaki duplicates ek saath aa jayein (easy to skip)
+        // Taaki duplicates ek saath aa jaye
         Arrays.sort(candidates); 
 
         // Step 2: Backtracking function call karte hain
@@ -18,7 +18,7 @@ class Solution {
         if(target == 0)
         {
             // current list ka copy banake result me daal do
-            result.add(new ArrayList<> (current)) ; 
+            result.add(new ArrayList<> (current)) ;
             return ; 
         }
 
@@ -42,7 +42,7 @@ class Solution {
             // aur index aage badha do (i+1 -> ek element ek hi baar use ho sakta hai)
             combinations(candidates , target - candidates[i] , i + 1 , current , result );
 
-            // Backtrack: jo element add kiya tha usko remove kar do
+            // Backtrack jo element add kiya tha usko remove kar do
             // taaki next option try kar sakein
             current.remove(current.size()-1);
         }
