@@ -8,21 +8,30 @@ class Solution {
 
     void permute(List<List<Integer>> result , int [] nums, List<Integer> current , boolean[] visited  )
     {
-        if(current.size()== nums.length )
-        {
-            result.add(new ArrayList(current));
-            return ;
-        }
+       // Base case: agar current list ka size nums array ke barabar hai
+if(current.size() == nums.length) {
+    // current me jo permutation ready hai, usko result me add karo
+    result.add(new ArrayList(current));
+    return; // recursion se wapas aao
+}
 
-        for(int i=0; i<nums.length ; i++)
-        {
-            if(visited[i]== true) continue ;
-            current.add(nums[i]);
-            visited[i] = true ;
+// Loop karke har element ko try karo
+for(int i = 0; i < nums.length; i++) {
+    // Agar ye element pehle hi use ho chuka hai, skip kar do
+    if(visited[i] == true) continue;
 
-            permute(result , nums , current , visited);
-            current.remove(current.size()-1);
-            visited[i] = false ;
-        }
+    // Step 1: element ko current permutation me add karo
+    current.add(nums[i]);
+    // Step 2: element ko visited mark karo
+    visited[i] = true;
+
+    // Step 3: recursion call karo baaki elements ke liye
+    permute(result, nums, current, visited);
+
+    // Step 4: Backtrack → last element remove karo aur visited reset karo
+    current.remove(current.size() - 1);
+    visited[i] = false;
+}
+
     }
 }
