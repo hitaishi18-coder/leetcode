@@ -1,26 +1,25 @@
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 class Solution {
     public boolean isValid(String s) {
-        Stack<Character> st = new Stack<>();
-        
-        for (int i = 0; i < s.length(); i++) {
-            char ch = s.charAt(i);
+        Deque<Character> dq = new ArrayDeque<>();
 
+        for (char ch : s.toCharArray()) {
             if (ch == '(' || ch == '{' || ch == '[') {
-                st.push(ch);
+                dq.push(ch); // push opening bracket
             } else {
-                if (st.isEmpty()) return false;
+                if (dq.isEmpty()) return false; // no match available
 
-                char open = st.pop();
+                char open = dq.pop();
                 if ((open == '(' && ch != ')') ||
                     (open == '{' && ch != '}') ||
                     (open == '[' && ch != ']')) {
-                    return false;
+                    return false; // mismatched
                 }
             }
         }
 
-        return st.isEmpty(); // valid if nothing left unmatched
+        return dq.isEmpty(); // valid only if all matched
     }
 }
